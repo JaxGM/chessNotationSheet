@@ -1,4 +1,4 @@
-name: Send Code to Server
+name: Send Code to Website
 
 on:
   release:
@@ -21,5 +21,5 @@ jobs:
           git config --global user.name "JaxGM"
           git config --global user.email "flume_prowl_0n@icloud.com"
           git add .
-          git commit -m "Send code to server"
+          git commit -m "Send code to website"
           git push origin main
