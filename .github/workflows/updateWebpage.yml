@@ -4,10 +4,17 @@ on:
   release:
     types: [published]
 
+permissions:
+  contents: read
+  packages: write
+  dependencies: write
+
 jobs:
   update_notationSheet:
     runs-on: ubuntu-latest
     steps:
+      - name: Set permissions for .git folder
+        run: chmod -R 777 .git
       - name: Checkout code
         uses: actions/checkout@v2
         with:
