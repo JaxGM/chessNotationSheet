@@ -1,0 +1,58 @@
+name: Update notationSheet on publish
+
+on:
+  release:
+    types: [published]
+
+runs-on: ubuntu-latest
+
+jobs:
+  update_notationSheet:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.release.tag_name }}
+          repository: JaxGM/chessNotationSheet
+      - name: Archive code as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: code
+          path: .
+      - name: Download code artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: code
+      - name: Push code to notationSheet folder
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const path = require('path');
+            const fs = require('fs');
+            const octokit = require('@octokit/rest')();
+            const tar = require('tar');
+            const tempDir = fs.mkdtempSync('notationSheet');
+            tar.x({
+              file: process.env.ARTIFACTS_PATH,
+              cwd: tempDir,
+            }).then(() => {
+              const files = fs.readdirSync(tempDir);
+              const targetDir = path.join(process.env.GITHUB_WORKSPACE, 'notationSheet');
+              fs.rmdirSync(targetDir, { recursive: true });
+              fs.mkdirSync(targetDir);
+              files.forEach(file => {
+                fs.renameSync(path.join(tempDir, file), path.join(targetDir, file));
+              });
+              octokit.repos.createOrUpdateFileContents({
+                owner: 'JaxGM',
+                repo: 'JaxGM.github.io',
+                path: 'notationSheet',
+                message: 'Update notationSheet on publish',
+                content: Buffer.from('').toString('base64'),
+                sha: ''
+              });
+            });
+        env:
+          ARTIFACTS_PATH: ${{ github.workspace }}/code.zip
