@@ -13,7 +13,7 @@ jobs:
       - name: Copy files
         run: |
           rm -rf ../JaxGM.github.io/chessNotation/*
-          cp -r ./chessNotationSheet/* ../JaxGM.github.io/chessNotation/
+          cp -r .JaxGM/chessNotationSheet/* ..JaxGM/JaxGM.github.io/chessNotation/
       - name: Commit changes
         run: |
           cd ../JaxGM.github.io/
