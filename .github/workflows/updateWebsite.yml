@@ -14,9 +14,9 @@ jobs:
         run: ls -R
       - name: Copy files
         run: |
-          rm -rf ../JaxGM.github.io/chessNotation/*
-          mkdir -p ../JaxGM.github.io/chessNotation/
-          cp -r ./notationSheet/* ../JaxGM.github.io/chessNotation/
+          rm -rf ../JaxGM.github.io/notationSheet/*
+          mkdir -p ../JaxGM.github.io/notationSheet/
+          cp -r ./notationSheet/* ../JaxGM.github.io/notationSheet/
       - name: Commit changes
         run: |
           cd ../JaxGM.github.io/
