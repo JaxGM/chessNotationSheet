@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Digital Chess Sheet</title> <!-- title -->
+        <script type="text/javascript" src="javaCode.js"></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <link rel="stylesheet" href="style.css" type="text/css" />
+    </head>
+    <body>
+        <!-- <p class="material-symbols-outlined" id="help"></p> -->
+        <div class="wide">
+            <div class="allButTable" id="leftdiv">
+                <h1>Digital Chess Score Sheet</h1> <!-- title -->
+                <button onclick="newGame()">+ New Game</Button> <!-- decorated Later -->
+                <button onclick="pgnExport()">Export as PGN</button> <!-- exports a complete pgn -->
+                <!-- <button onclick="">Print</button> -->  <!-- print the notation in a nice way -->
+                <h3>Game Info</h3>
+                <body>
+                    <p id="whitePlayer">White Player: </p>
+                    <p id="blackPlayer">Black Player: </p> 
+                </body>
+                <!-- <h3>Placeholder for FEN board</h3> -->
+                <div class="stickyDiv">
+                    <div class="HStack">
+                    <button onclick="back()" class="insideButton adjustmentButton"><-</button>
+                    <button onclick="next()" class="insideButton adjustmentButton">-></button>
+                    <button onclick="del()" class="insideButton adjustmentButton">Clear Cell</button>
+                    </div>
+                    
+                    <div class="HStack">
+                        <button onclick="pieceButton('K')" class="insideButton">K</button>
+                        <button onclick="pieceButton('Q')" class="insideButton">Q</button>
+                        <button onclick="pieceButton('R')" class="insideButton">R</button>
+                        <button onclick="pieceButton('B')" class="insideButton">B</button>
+                        <button onclick="pieceButton('N')" class="insideButton">N</button>
+                    </div>
+                    
+                    <div class="HStack">
+                        <button onclick="castles(true)" class="insideButton">0-0</button>
+                        <button onclick="castles(false)" class="insideButton">0-0-0</button>
+                    </div>
+
+                    <div class="HStack">
+                        <button onclick="letter('a')" class="insideButton">a</button>
+                        <button onclick="letter('b')" class="insideButton">b</button>
+                        <button onclick="letter('c')" class="insideButton">c</button>
+                        <button onclick="letter('d')" class="insideButton">d</button>
+                        <button onclick="letter('e')" class="insideButton">e</button>
+                        <button onclick="letter('f')" class="insideButton">f</button>
+                        <button onclick="letter('g')" class="insideButton">g</button>
+                        <button onclick="letter('h')" class="insideButton">h</button>
+                    </div>
+
+                    <div class="HStack">
+                        <button onclick="number(1)" class="insideButton">1</button>
+                        <button onclick="number(2)" class="insideButton">2</button>
+                        <button onclick="number(3)" class="insideButton">3</button>
+                        <button onclick="number(4)" class="insideButton">4</button>
+                        <button onclick="number(5)" class="insideButton">5</button>
+                        <button onclick="number(6)" class="insideButton">6</button>
+                        <button onclick="number(7)" class="insideButton">7</button>
+                        <button onclick="number(8)" class="insideButton">8</button>
+                    </div>
+                    <div class="HStack">
+                        <button onclick="endGame('w')" class="insideButton">White is Victorious</button>
+                        <button onclick="endGame('d')" class="insideButton">Draw</button>
+                        <button onclick="endGame('b')" class="insideButton">Black is Victorious</button>
+                    </div>
+                </div>
+            </div> </tbody>
+
+            <div class="rightSide" id="rightdiv">
+    
+                <div class= "tableDiv" id= "notationTable"></div>
+
+                <div class="HStack rightButtons">
+                    <button onclick="back()" class="insideButton rightButton adjustmentButton"><-</button>
+                    <button onclick="next()" class="insideButton rightButton adjustmentButton">-></button>
+                    <button onclick="del()" class="insideButton rightButton adjustmentButton">Clear Cell</button>
+                </div>
+            </div>
+            
+
+
+
+        </div> 
+        
+        <div class="popup" id="popup1">
+            <div class="popupContent">
+                <div class="popupHeader">
+                    <span class="popupClose" onclick="closePopup()">&times;</span>  
+                    <h1 class="popupTitle">Chess Notation Sheet</h1>
+                    <p lass="popupSubtitle">A Coding Project by Jax Miller</p> 
+                                
+                </div>
+
+                <div class="popupBody">
+                    
+                    
+                    <h2 class="popupSectionHeader">To Use</h2>
+                        <ul>
+                            <li>Type Your Moves Using Algebraic Notation (See Bellow)</li>
+                            <li>Once the cell turns green, you are clear to move on.</li>
+                        </ul>
+                        <hr>
+                    <h2 class="popupSectionHeader">Algebraic Notation</h2>
+                        <p><strong>Pieces</strong></p>
+                            <ul class="popupBodyText">
+                                <li class="popupBodyText">K = King</li>
+                                <li class="popupBodyText">Q = Queen</li>
+                                <li class="popupBodyText">R = Rook</li>
+                                <li class="popupBodyText">B = Bishop</li>
+                                <li class="popupBodyText">N = Knight (I know)</li>
+                            </ul>
+                        <p><strong>Methods</strong></p>
+                            <ul class="popupBodyText">
+                                <li class="popupBodyText">Piece - End Location (Example: Qg5)<ul>
+                                    <li class="popupBodyText">When moving a pawn, there is no need to specify P for Pawn, it&#39;s default.</li>
+                                    </ul>
+                                </li>
+                                <li class="popupBodyText">Piece - Modifier Column - End Location (Example: N8e6)<ul>
+                                    <li class="popupBodyText">This is used when two of the same piece can go to the same place.</li>
+                                    </ul>
+                                </li>
+                                <li class="popupBodyText">Piece - Modifier Row - End Location (Example: Rbb3)<ul>
+                                    <li class="popupBodyText">This is used when two of the same piece can go to the same place <strong>and</strong> are on the same column.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        <hr>
+                    <h2 class="popupSectionHeader">The Story</h2>
+                        <p class="popupBodyText">As a lover of chess and technology, writing game notation seemed so inefficient. I created this site to provide an easy and free way to write notation and export a PGN. To see the site&#39;s code or future features, check out our <a href="https://google.com">Github Page</a>.</p>
+                </div>
+            </div>
+        </div>
+
+    </body>
+
+    <div>
+        <i class="material-symbols-outlined helpIcon" onclick="openPopup()";>help</i>
+    </div>
+    <script>refresh()</script>
+</html>
