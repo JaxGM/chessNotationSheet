@@ -4,8 +4,6 @@ on:
   release:
     types: [published]
 
-runs-on: ubuntu-latest
-
 jobs:
   update_notationSheet:
     runs-on: ubuntu-latest
