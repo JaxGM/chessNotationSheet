@@ -19,8 +19,8 @@ jobs:
       - name: Commit changes
         run: |
           cd ../JaxGM.github.io/
-          git config --global user.name "Your Name"
-          git config --global user.email "your-email@example.com"
+          git config --global user.name "JaxGM"
+          git config --global user.email "flume_prowl_0n@icloud.com"
           git add .
           git commit -m "Update website"
           git push origin main
