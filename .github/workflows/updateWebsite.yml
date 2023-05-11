@@ -11,21 +11,18 @@ jobs:
     runs-on: ubuntu-latest
     container: ubuntu
     steps:
-      - name: Extract branch name
-        shell: bash
-        run: echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >>$GITHUB_OUTPUT
-        id: extract_branch
       - uses: actions/checkout@v1
-        run: npm ci
-        uses: nelonoel/branch-name@v1
-        run: echo ${BRANCH_NAME}
+      - run: npm ci
+      - uses: nelonoel/branch-name@v1.0.1
+      # Use branch name for whatever purpose
+      - run: echo ${BRANCH_NAME}
       - uses: actions/checkout@v2
 #       - name: creates output
 #         run:  sh ./build.sh
 #       - name: Install mustache (to update the date)
 #         run:  apk add ruby && gem install mustache
       - name: Pushes to another repository
-        if: ${{ $BRANCH_NAME == dev }}
+        if: ${{ ${BRANCH_NAME} == dev }}
         id: push_directory
         uses: cpina/github-action-push-to-another-repository@main
         env:
