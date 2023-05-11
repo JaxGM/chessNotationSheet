@@ -38,7 +38,10 @@
         kCastle: false,
         qCastle: false,
         castle: "",
-        moveComplete: false
+        moveComplete: false,
+        promotionShow: "",
+        promotionListen: false,
+        promotionPiece: ""
     }, {
         moveID: 1, // This is the same as the array row for ease of use. This row is just a blank.
         piece: "",
@@ -60,7 +63,10 @@
         kCastle: false,
         qCastle: false,
         castle: "",
-        moveComplete: false
+        moveComplete: false,
+        promotionShow: "",
+        promotionListen: false,
+        promotionPiece: ""
     }];
 
 
@@ -94,7 +100,9 @@
                             modNumberW+
                             moves[tableArray[i].whiteMoveID].modLetter +
                             moves[tableArray[i].whiteMoveID].letter +
-                            numberW
+                            numberW +
+                            moves[tableArray[i].whiteMoveID].promotionShow +
+                            moves[tableArray[i].whiteMoveID].promotionPiece
                     }
                 }
 
@@ -115,7 +123,9 @@
                             modNumberB+
                             moves[tableArray[i].blackMoveID].modLetter +
                             moves[tableArray[i].blackMoveID].letter +
-                            numberB
+                            numberB +
+                            moves[tableArray[i].blackMoveID].promotionShow +
+                            moves[tableArray[i].blackMoveID].promotionPiece
                     }
                 }
 
@@ -372,6 +382,9 @@
             moves[a].qCastle = false
             moves[a].castle = false
             moves[a].moveComplete = false
+            moves[a].promotionPiece = ""
+            moves[a].promotionListen = false
+            moves[a].promotionShow = ""
 
             
 
@@ -404,7 +417,10 @@
                 kCastle: false,
                 qCastle: false,
                 castle: "",
-                moveComplete: false
+                moveComplete: false,
+                promotionShow: "",
+                promotionListen: false,
+                promotionPiece: ""
             });
             
 
@@ -424,7 +440,10 @@
                 kCastle: false,
                 qCastle: false,
                 castle: "",
-                moveComplete: false
+                moveComplete: false,
+                promotionShow: "",
+                promotionListen: false,
+                promotionPiece: ""
             });
             
             var tempNeededCollum = tableArray.length
@@ -471,14 +490,42 @@
                 var tempPiece = whichPiece
                 
                 refresh()
-
+            
                 var tempMoveID = 0
                 if (whosMove) {
                     tempMoveID = (tableArray[y].whiteMoveID)
                 } else {
                     tempMoveID = (tableArray[y].blackMoveID)
                 }
-                 moves[tempMoveID].piece = tempPiece
+
+                if (moves[tempMoveID].promotionListen) {
+                    moves[tempMoveID].promotionPiece = tempPiece
+                    moves[tempMoveID].promotionListen = false
+                } else {
+                    moves[tempMoveID].piece = tempPiece
+                }
+
+                refresh()
+        }}
+
+        function promotionEquals() {
+            anyButtonClickCheckStart()
+            if (gameStarted){
+            
+                var tempPiece = whichPiece
+                
+                refresh()
+            
+                var tempMoveID = 0
+                if (whosMove) {
+                    tempMoveID = (tableArray[y].whiteMoveID)
+                } else {
+                    tempMoveID = (tableArray[y].blackMoveID)
+                }
+
+                    moves[tempMoveID].promotionShow = "="
+                    moves[tempMoveID].promotionListen = true
+                
 
                 refresh()
         }}
