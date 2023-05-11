@@ -21,12 +21,11 @@ jobs:
         with:
           repository: JaxGM/chessNotationSheet
           ref: main
+          path: chessNotationSheet
       - name: List contents of chessNotationSheet directory
         run: ls -l chessNotationSheet/
       - name: Copy contents of chessNotationSheet into notationSheet folder
         run: cp -R chessNotationSheet/* notationSheet/
-        env:
-          EXCLUDE: .github
       - name: Commit and push changes
         uses: EndBug/add-and-commit@v7
         with:
