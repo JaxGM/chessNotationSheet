@@ -21,6 +21,8 @@ jobs:
         with:
           repository: JaxGM/chessNotationSheet
           ref: main
+      - name: List contents of working directory
+        run: ls -l
       - name: Copy contents of chessNotationSheet into notationSheet folder
         run: cp -R chessNotationSheet/* notationSheet/
       - name: Commit and push changes
