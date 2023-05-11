@@ -52,7 +52,10 @@
         kCastle: false,
         qCastle: false,
         castle: "",
-        moveComplete: false
+        moveComplete: false,
+        promotionShow: "",
+        promotionListen: false,
+        promotionPiece: ""
     }, {
         moveID: 2, // This is the same as the array row for ease of use. This row is just a blank.
         piece: "",
@@ -511,9 +514,6 @@
         function promotionEquals() {
             anyButtonClickCheckStart()
             if (gameStarted){
-            
-                var tempPiece = whichPiece
-                
                 refresh()
             
                 var tempMoveID = 0
