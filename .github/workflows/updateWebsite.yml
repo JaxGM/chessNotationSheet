@@ -1,26 +1,33 @@
+name: Update Notation Sheet
+
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
-  build:
+  update_notation_sheet:
     runs-on: ubuntu-latest
-    container: ubuntu
     steps:
-      - uses: actions/checkout@v2
-      - name: Copy output_temp/ to output/ using rsync (to exclude main.epub in this example)
-        run:  apk add rsync && rsync -arv --exclude="/github/workflows" output_temp/ output/
-      - name: Pushes to another repository
-        id: push_directory
-        uses: cpina/github-action-push-to-another-repository@main
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+      - name: Checkout JaxGM/JaxGM.github.io repo
+        uses: actions/checkout@v2
         with:
-          source-directory: output/
-          destination-github-username: 'JaxGM'
-          destination-repository-name: 'JaxGM.github.io'
-          user-email: flume_prowl_0n@icloud.com
-          target-branch: main
-          target-directory: 'notationSheet/'
+          repository: JaxGM/JaxGM.github.io
+          ref: main
+      - name: Remove contents of notationSheet folder
+        run: rm -rf notationSheet/*
+      - name: Checkout JaxGM/chessNotationSheet repo
+        uses: actions/checkout@v2
+        with:
+          repository: JaxGM/chessNotationSheet
+          ref: main
+      - name: Copy contents of chessNotationSheet into notationSheet folder
+        run: cp -R chessNotationSheet/* notationSheet/
+      - name: Commit and push changes
+        uses: EndBug/add-and-commit@v7
+        with:
+          author_name: JaxGM
+          author_email: flume_prowl_0n@icloud.com
+          message: "Update notation sheet"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
