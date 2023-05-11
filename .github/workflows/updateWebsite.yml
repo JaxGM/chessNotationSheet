@@ -1,11 +1,6 @@
-name: Update notation sheet
+name: Update Notation Sheet
 
 on:
-  release:
-    types:
-      - created
-    tags:
-      - Published
   push:
     branches:
       - main
@@ -13,27 +8,21 @@ on:
 jobs:
   update_notation_sheet:
     runs-on: ubuntu-latest
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-
-    - name: Clone JaxGM/chessNotationSheet
-      uses: actions/checkout@v2
       with:
-        repository: JaxGM/chessNotationSheet
-        path: chessNotationSheet
+        submodules: 'recursive'
 
-    - name: Delete contents of notationSheet folder
-      run: rm -rf jaxgm/jaxgm.github.io/notationSheet/*
+    - name: Clear Notation Sheet Folder
+      run: rm -rf notationSheet/*
 
-    - name: Copy new release contents to notationSheet folder
-      run: mv jaxgm.github.io/notationSheet/* JaxGM/chessNotationSheet/
+    - name: Copy Chess Notation Sheet
+      run: cp -R JaxGM/chessNotationSheet/. notationSheet/
 
-    - name: Commit and push changes
-      run: |
-        cd jaxgm.github.io
-        git config --local user.email "flume_prowl_0n@icloud.com"
-        git config --local user.name "JaxGM"
-        git add notationSheet
-        git commit -m "Update notation sheet"
-        git push
+    - name: Commit changes
+      uses: EndBug/add-and-commit@v7
+      with:
+        message: 'Update notation sheet'
+        add: 'notationSheet'
