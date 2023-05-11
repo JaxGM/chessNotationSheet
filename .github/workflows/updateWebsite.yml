@@ -12,15 +12,15 @@ jobs:
                                # used in the specific "build.sh"
     steps:
       - uses: actions/checkout@v2
-      - name: creates output
-        run:  sh ./build.sh # some command from your repository that creates
+#       - name: creates output
+#         run:  sh ./build.sh # some command from your repository that creates
                             # output to "source-directory" ("output" in the example)
       - name: Pushes to another repository
         uses: cpina/github-action-push-to-another-repository@main
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
-          source-directory: 'output'
+          source-directory: 'JaxGM/chessNotationSheet/'
           destination-github-username: 'JaxGM'
           destination-repository-name: 'JaxGM.github.io.'
           user-email: flume_prowl_0n@icloud.com
