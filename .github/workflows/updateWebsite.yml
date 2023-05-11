@@ -1,4 +1,4 @@
-name: Update Notation Sheet
+name: Update Notation Sheet Website
 
 on:
   release:
@@ -9,19 +9,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v2.5.2
       with:
-        repository: JaxGM/chessNotationSheet
         ref: ${{ github.event.release.tag_name }}
+    - name: Use Node.js 16.x
+      uses: actions/setup-node@v2.6.1
+      with:
+        node-version: '16.x'
     - name: Deploy to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@4.1.4
+      uses: JamesIves/github-pages-deploy-action@4.2.3
       with:
         token: ${{ secrets.ACCESS_TOKEN }}
         branch: main
         folder: notationSheet
-        repository: JaxGM/JaxGM.github.io
-        cname: jaxgm.github.io
-        commit_message: "Deployed release ${{ github.event.release.tag_name }}"
+        workspace: chessNotationSheet
+        target-folder: ''
+        git-config-name: 'JaxGM'
+        git-config-email: 'flume_prowl_0n@icloud.com'
+        commit-message: "Deployed release ${{ github.event.release.tag_name }}"
     - name: Set git user
       run: |
         git config --global user.name "JaxGM"
