@@ -15,17 +15,11 @@ jobs:
       with:
         submodules: 'recursive'
 
-    - name: Debug
-      run: |
-        pwd
-        ls JaxGM
-        ls JaxGM/chessNotationSheet
-
     - name: Clear Notation Sheet Folder
       run: rm -rf notationSheet/*
 
     - name: Copy Chess Notation Sheet
-      run: cp -R JaxGM/chessNotationSheet/. notationSheet/
+      run: cp -R chessNotationSheet/. notationSheet/
 
     - name: Commit changes
       uses: EndBug/add-and-commit@v7
