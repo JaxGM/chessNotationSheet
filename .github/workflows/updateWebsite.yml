@@ -23,21 +23,17 @@ jobs:
           ref: main
 #       - name: Copy contents of chessNotationSheet into notationSheet folder
 #         run: cp -R JaxGM/chessNotationSheet/* notationSheet/
-      - name: Copy files to another repository
-        uses: nkoppel/push-files-to-another-repository@v1.1.1
+      - uses: actions/checkout@v2
+      - name: creates output
+        run:  sh ./build.sh # some command from your repository that creates
+                            # output to "source-directory" ("output" in the example)
+      - name: Pushes to another repository
+        uses: cpina/github-action-push-to-another-repository@main
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
-          source-files: 'chessNotationSheet/'
-          destination-username: 'JaxGM'
-          destination-repository: 'JaxGM.github.io'
-          destination-directory: 'notationSheet'
-          commit-email: 'flume_prowl_0n@icloud.com'
-      - name: Commit and push changes
-        uses: EndBug/add-and-commit@v7
-        with:
-          author_name: JaxGM
-          author_email: flume_prowl_0n@icloud.com
-          message: "Update notation sheet"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          source-directory: 'output'
+          destination-github-username: 'JaxGM'
+          destination-repository-name: 'JaxGM.github.io.'
+          user-email: flume_prowl_0n@icloud.com
+          target-branch: main
