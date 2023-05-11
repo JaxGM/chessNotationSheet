@@ -20,7 +20,7 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
-          source-directory: 'chessNotationSheet/'
+          source-directory: ${{ github.workspace }}
           destination-github-username: 'JaxGM'
           destination-repository-name: 'JaxGM.github.io'
           user-email: flume_prowl_0n@icloud.com
