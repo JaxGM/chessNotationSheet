@@ -11,12 +11,17 @@ jobs:
     runs-on: ubuntu-latest
     container: ubuntu
     steps:
+      - name: Extract branch name
+        shell: bash
+        run: echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >>$GITHUB_OUTPUT
+        id: extract_branch
       - uses: actions/checkout@v2
 #       - name: creates output
 #         run:  sh ./build.sh
 #       - name: Install mustache (to update the date)
 #         run:  apk add ruby && gem install mustache
       - name: Pushes to another repository
+        if: ${{ true }}
         id: push_directory
         uses: cpina/github-action-push-to-another-repository@main
         env:
