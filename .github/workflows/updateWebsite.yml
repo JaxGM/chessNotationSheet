@@ -32,7 +32,7 @@ jobs:
           destination-username: 'JaxGM'
           destination-repository: 'JaxGM.github.io'
           destination-directory: 'notationSheet'
-          commit-email: 'nathankoppel0@gmail.com'
+          commit-email: 'flume_prowl_0n@icloud.com'
       - name: Commit and push changes
         uses: EndBug/add-and-commit@v7
         with:
