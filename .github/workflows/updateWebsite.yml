@@ -1,4 +1,4 @@
-name: Update notation sheet
+name: Update notation sheet v12
 
 on:
   release:
@@ -27,7 +27,7 @@ jobs:
       run: rm -rf jaxgm.github.io/notationSheet/*
 
     - name: Copy new release contents to notationSheet folder
-      run: cp -r chessNotationSheet/* jaxgm.github.io/notationSheet/
+      run: mv chessNotationSheet/* jaxgm.github.io/notationSheet/
 
     - name: Commit and push changes
       run: |
