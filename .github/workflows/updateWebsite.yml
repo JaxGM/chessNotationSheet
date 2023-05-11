@@ -12,17 +12,16 @@ jobs:
     container: ubuntu
     steps:
       - uses: actions/checkout@v2
-      - name: Copy output_temp/ to output/ using rsync (to exclude main.epub in this example)
-        run:  apk add rsync && rsync -arv --exclude="/main.epub" output_temp/ output/
+      - name: creates output
+        run:  sh ./build.sh
       - name: Pushes to another repository
         id: push_directory
         uses: cpina/github-action-push-to-another-repository@main
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
-          source-directory: output/
+          source-directory: 'output'
           destination-github-username: 'JaxGM'
           destination-repository-name: 'JaxGM.github.io'
           user-email: flume_prowl_0n@icloud.com
           target-branch: main
-          target-directory: '/notationSheet'
