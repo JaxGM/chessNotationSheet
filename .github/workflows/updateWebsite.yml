@@ -1,5 +1,4 @@
-name: Update Notation Sheet
-
+name: Update Website Code
 on:
   push:
     branches:
