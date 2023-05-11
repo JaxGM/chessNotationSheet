@@ -8,6 +8,7 @@ on:
 jobs:
   update_notation_sheet:
     runs-on: ubuntu-latest
+    container: pandoc/latex
     steps:
       - name: Checkout JaxGM/JaxGM.github.io repo
         uses: actions/checkout@v2
