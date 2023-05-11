@@ -8,21 +8,26 @@ on:
 jobs:
   update_notation_sheet:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-      with:
-        submodules: 'recursive'
-
-    - name: Clear Notation Sheet Folder
-      run: rm -rf notationSheet/*
-
-    - name: Copy Chess Notation Sheet
-      run: cp -R chessNotationSheet/. notationSheet/
-
-    - name: Commit changes
-      uses: EndBug/add-and-commit@v7
-      with:
-        message: 'Update notation sheet'
-        add: 'notationSheet'
+      - name: Checkout JaxGM/JaxGM.github.io repo
+        uses: actions/checkout@v2
+        with:
+          repository: JaxGM/JaxGM.github.io
+          ref: main
+      - name: Remove contents of notationSheet folder
+        run: rm -rf notationSheet/*
+      - name: Checkout JaxGM/chessNotationSheet repo
+        uses: actions/checkout@v2
+        with:
+          repository: JaxGM/chessNotationSheet
+          ref: main
+      - name: Copy contents of chessNotationSheet into notationSheet folder
+        run: cp -R chessNotationSheet/* notationSheet/
+      - name: Commit and push changes
+        uses: EndBug/add-and-commit@v7
+        with:
+          author_name: JaxGM
+          author_email: flume_prowl_0n@icloud.com
+          message: "Update notation sheet"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
