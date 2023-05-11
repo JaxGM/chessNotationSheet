@@ -21,8 +21,18 @@ jobs:
         with:
           repository: JaxGM/chessNotationSheet
           ref: main
-      - name: Copy contents of chessNotationSheet into notationSheet folder
-        run: cp -R JaxGM/chessNotationSheet/* notationSheet/
+#       - name: Copy contents of chessNotationSheet into notationSheet folder
+#         run: cp -R JaxGM/chessNotationSheet/* notationSheet/
+      - name: Copy files to another repository
+        uses: nkoppel/push-files-to-another-repository@v1.1.1
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-files: 'chessNotationSheet/'
+          destination-username: 'JaxGM'
+          destination-repository: 'JaxGM.github.io'
+          destination-directory: 'notationSheet'
+          commit-email: 'nathankoppel0@gmail.com'
       - name: Commit and push changes
         uses: EndBug/add-and-commit@v7
         with:
