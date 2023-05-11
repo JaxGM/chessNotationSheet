@@ -21,10 +21,10 @@ jobs:
       uses: actions/checkout@v2
       with:
         repository: JaxGM/chessNotationSheet
-        path: jaxgm.github.io
+        path: chessNotationSheet
 
     - name: Delete contents of notationSheet folder
-      run: rm -rf jaxgm.github.io/notationSheet/*
+      run: rm -rf jaxgm/jaxgm.github.io/notationSheet/*
 
     - name: Copy new release contents to notationSheet folder
       run: mv JaxGM/chessNotationSheet/* jaxgm.github.io/notationSheet/
