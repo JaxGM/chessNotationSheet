@@ -22,7 +22,7 @@ jobs:
 #       - name: Install mustache (to update the date)
 #         run:  apk add ruby && gem install mustache
       - name: Pushes to another repository
-        if: ${{ ${BRANCH_NAME} == dev }}
+        if: ${{ output == dev }}
         id: push_directory
         uses: cpina/github-action-push-to-another-repository@main
         env:
