@@ -3,3 +3,4 @@
 workflows
 
 updateWebsite.yml
+.DS_Store
