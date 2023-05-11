@@ -1,4 +1,4 @@
-name: Update notation sheet v12
+name: Update notation sheet
 
 on:
   release:
@@ -17,17 +17,17 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Clone JaxGM/JaxGM.github.io
+    - name: Clone JaxGM/chessNotationSheet
       uses: actions/checkout@v2
       with:
-        repository: JaxGM/JaxGM.github.io
+        repository: JaxGM/chessNotationSheet
         path: jaxgm.github.io
 
     - name: Delete contents of notationSheet folder
       run: rm -rf jaxgm.github.io/notationSheet/*
 
     - name: Copy new release contents to notationSheet folder
-      run: mv chessNotationSheet/* jaxgm.github.io/notationSheet/
+      run: mv JaxGM/chessNotationSheet/* jaxgm.github.io/notationSheet/
 
     - name: Commit and push changes
       run: |
