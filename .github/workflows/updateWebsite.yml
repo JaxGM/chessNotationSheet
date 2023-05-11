@@ -22,6 +22,6 @@ jobs:
         with:
           source-directory: 'JaxGM/chessNotationSheet/'
           destination-github-username: 'JaxGM'
-          destination-repository-name: 'JaxGM.github.io.'
+          destination-repository-name: 'JaxGM.github.io'
           user-email: flume_prowl_0n@icloud.com
           target-branch: main
