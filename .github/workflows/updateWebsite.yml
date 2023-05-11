@@ -2,9 +2,9 @@ name: Update Notation Sheet
 
 on:
   push:
-    branches: [ main ]
+    branches: [ dev ]
   pull_request:
-    branches: [ main ]
+    branches: [ dev ]
 
 jobs:
   build:
@@ -19,6 +19,7 @@ jobs:
       - name: Pushes to another repository
         id: push_directory
         uses: cpina/github-action-push-to-another-repository@main
+        if: github.ref == 'refs/heads/main'
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
@@ -28,3 +29,16 @@ jobs:
           user-email: flume_prowl_0n@icloud.com
           target-branch: main
           target-directory: ./notationSheet/
+      - name: Pushes to another repository - dev
+        id: push_directory_dev
+        uses: cpina/github-action-push-to-another-repository@main
+        if: github.ref == 'refs/heads/dev'
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: ./files/
+          destination-github-username: 'JaxGM'
+          destination-repository-name: 'JaxGM.github.io'
+          user-email: flume_prowl_0n@icloud.com
+          target-branch: main
+          target-directory: ./notationSheet/dev/
