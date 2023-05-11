@@ -27,7 +27,7 @@ jobs:
       run: rm -rf jaxgm/jaxgm.github.io/notationSheet/*
 
     - name: Copy new release contents to notationSheet folder
-      run: mv JaxGM/chessNotationSheet/* jaxgm.github.io/notationSheet/
+      run: mv jaxgm.github.io/notationSheet/* JaxGM/chessNotationSheet/
 
     - name: Commit and push changes
       run: |
